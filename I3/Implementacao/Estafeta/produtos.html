@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="../libs/bootstrap-5.2.2-dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../libs/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../libs/leaflet/leaflet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../libs/leaflet/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
+    <script src="../libs/jquery/jquery-3.6.1.js"></script>
+    <script src="../libs/knockout-3.5.1.js"></script>
+    <script src="../libs/knockout.mapping-latest.js"></script>
+    <script src="../libs/popper.min.js"></script>
+    <title>Template</title>
+    <style>
+      #neubar {
+        background: #fae8d2;
+        box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+      }
+      
+      .nav-item .active {
+        border-radius: 6px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  4px 4px 8px #ddc1a0,
+                    -4px -4px 8px #f7e5cc;
+      }
+      #neubar .dropdown-menu a:hover {
+        color: #454545
+      }
+      #neubar .nav-item {
+        margin : auto 4px;
+      }
+      #neubar a {
+      
+        padding-left:12px;
+        padding-right:12px;
+      }
+      #neubar .dropdown-menu {
+        background : #545454
+      }
+      a.navbar-brand {
+        color: #454545
+      }
+      .familiaImg {
+        display: inline-block;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(../images/estrada.webp);
+        background-size: cover;
+        background-position: 0 750px;
+      }
+
+      /* coloca o texto em cima da imagem */
+      .familiaImg:before {
+        content: 'Aceite serviços';
+        font-size: 3rem;
+        position: absolute;
+        top: 260px;  /* posição do texto em relação ao topo da imagem */
+        left: 300px; /* posição do texto em relação ao lado esquerdo da imagem */
+      }
+
+      .card-custom {
+        overflow: hidden;
+        min-height: 450px;
+        box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+      }
+
+      .card-custom-img {
+        height: 200px;
+        min-height: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-color: inherit;
+      }
+
+      /* First border-left-width setting is a fallback */
+      .card-custom-img::after {
+        position: absolute;
+        content: '';
+        top: 161px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-top-width: 40px;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-left-width: 545px;
+        border-left-width: calc(575px - 5vw);
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: inherit;
+      }
+
+      .card-custom-avatar img {
+        border-radius: 50%;
+        box-shadow: 0 0 50px #ff8800cc;
+        position: absolute;
+        top: 100px;
+        left: 1.25rem;
+        width: 100px;
+        height: 100px;
+      }
+      #myCard {
+        overflow: hidden;
+        box-shadow: 0 0 15px #ff88003f;
+      }
+
+      .corTop {
+        border-radius: 1px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  -4px -4px 8px #df8d1b3f,
+                      4px 4px 8px #ddc1a0;
+                    
+      }
+
+      .backButton {opacity: 0.5;}
+      .backButton:hover {
+        opacity: 0.75;
+      }
+
+      
+      #neubar {
+        background: #fae8d2;
+        box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+      }
+      
+      .nav-item .active {
+        border-radius: 6px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  4px 4px 8px #ddc1a0,
+                    -4px -4px 8px #f7e5cc;
+      }
+      #neubar .dropdown-menu a:hover {
+        color: #454545
+      }
+      #neubar .nav-item {
+        margin : auto 4px;
+      }
+      #neubar a {
+      
+        padding-left:12px;
+        padding-right:12px;
+      }
+      #neubar .dropdown-menu {
+        background : #545454
+      }
+      a.navbar-brand {
+        color: #454545
+      }
+      
+      .card.este{
+
+      width: 350px;
+      border: none;
+      box-shadow: 5px 6px 6px 2px #e9ecef;
+      border-radius: 12px;
+      }
+
+      .circle-image img{
+
+      border: 6px solid #fff;
+        border-radius: 100%;
+        padding: 0px;
+        top: -28px;
+        position: relative;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        z-index: 1;
+        background: #e7d184;
+        cursor: pointer;
+
+      }
+
+
+      .dot {
+          height: 18px;
+        width: 18px;
+        background-color: blue;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        border: 3px solid #fff;
+        top: -48px;
+        left: 186px;
+        z-index: 1000;
+      }
+
+      .name{
+      margin-top: -21px;
+      font-size: 18px;
+      }
+
+
+      .fw-500{
+      font-weight: 500 !important;
+      }
+
+
+      .start{
+
+      color: green;
+      }
+
+      .stop{
+      color: red;
+      }
+
+
+      .rate{
+
+      border-bottom-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+
+      }
+
+
+
+      .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center
+      }
+
+      .rating>input {
+        display: none
+      }
+
+      .rating>label {
+        position: relative;
+        width: 1em;
+        font-size: 30px;
+        font-weight: 300;
+        color: #FFD600;
+        cursor: pointer
+      }
+
+      .rating>label::before {
+        content: "\2605";
+        position: absolute;
+        opacity: 0
+      }
+
+      .rating>label:hover:before,
+      .rating>label:hover~label:before {
+        opacity: 1 !important
+      }
+
+      .rating>input:checked~label:before {
+        opacity: 1
+      }
+
+      .rating:hover>input:checked~label:before {
+        opacity: 0.4
+      }
+
+
+      .buttons{
+      top: 36px;
+        position: relative;
+      }
+
+
+      .rating-submit{
+      border-radius: 15px;
+      color: #fff;
+          height: 49px;
+      }
+
+
+      .rating-submit:hover{
+
+      color: #fff;
+      }
+
+
+
+
+
+
+
+      .card-custom {
+        overflow: hidden;
+        min-height: 450px;
+        box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+      }
+
+      .card-custom-img {
+        background-color: #FFFFFF;
+        height: 200px;
+        min-height: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-color: inherit;
+      }
+
+      /* First border-left-width setting is a fallback */
+      .card-custom-img::after {
+        position: absolute;
+        content: '';
+        top: 161px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-top-width: 40px;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-left-width: 545px;
+        border-left-width: calc(575px - 5vw);
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: white;
+        
+      }
+
+      .card-custom-avatar img {
+        border-radius: 50%;
+        box-shadow: 0 0 50px #ff8800cc;
+        position: absolute;
+        top: 100px;
+        left: 1.25rem;
+        width: 100px;
+        height: 100px;
+      }
+      #myCard {
+        overflow: hidden;
+        box-shadow: 0 0 15px #ff88003f;
+      }
+
+      .corTop {
+        border-radius: 4px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  -4px -4px 8px #160e033f,
+                      4px 4px 8px #ddc1a0;
+                    
+      }
+
+      .backButton {opacity: 0.5;}
+      .backButton:hover {
+        opacity: 0.75;
+      }
+
+      body {
+        background-color: #f5f7fa;
+      }
+
+      .card.map-card .living-coral {
+        background-color: #5da0f7;
+      }
+
+      .card.map-card .living-coral-text {
+        color: #5da0f7;
+      }
+
+      .card.map-card .table th {
+        width: 2rem;
+      }
+
+      .card.map-card .pt-3-5 {
+        padding-top: 1.25rem;
+      }
+
+      .card.map-card .card-body {
+        position: absolute;
+        width: 100%;
+        height: 51%;
+        top: 51.8%;
+        overflow: hidden;
+        background-color: transparent;
+        -webkit-transition: all 1s;
+        -o-transition: all 1s;
+        transition: all 1s;
+        -webkit-border-radius: 0 !important;
+        border-radius: 0 !important;
+        z-index: 1000;
+      }
+
+      .card.map-card .card-body.closed {
+        top: 100%;
+        height: 9.5rem;
+        margin-top: -7.5rem;
+      }
+
+      .card.map-card .map-container {
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        height: 0;
+      }
+
+      .card.map-card .map-container #map1, .card.map-card .map-container #map2, .card.map-card .map-container #map3, .card.map-card .map-container #map4 {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+
+      .card.map-card .button .btn-floating {
+        margin-top: -1.5rem;
+      }
+      .rotate {
+        transform: rotate(180deg);
+        transition: transform 0.5s; /* adiciona uma animação de 0.5 segundos na transição */
+      }
+
+      .h1Custom { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
+
+      .h2Custom { color: #111; font-family: 'Open Sans', sans-serif; font-size: 25px; font-weight: 300; line-height: 32px; margin: 0; text-align: center; }
+      #myCard {
+        overflow: hidden;
+        box-shadow: 0 0 15px #ff88003f;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top" id="neubar">
+      <div class="container">
+        <a class="navbar-brand" href="home.html"><img src="../images/Logo.png" height="60" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+     
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+              <a class="nav-link mx-2" aria-current="page" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2 active" href="produtos.html">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="bagagens.html">Os meus serviços</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sobre nós
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Fórum</a></li>
+                <li><a class="dropdown-item" href="#">Sobre nós</a></li>
+                <li><a class="dropdown-item" href="#">Apoio ao cliente</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Entrar como cliente" class="nav-link mx-2 mb-0" href="../home.html"><img src="../images/LoginVermelho.png" height="40"/></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Working Area -->
+    <div class="familiaImg col-12 text-light fs-1 fw-bold fw-light font-monospace" style="height: 60vh;"></div>
+    
+    <div id="myCard" class="card border-0 col-12 mx-auto" id="myCard" style="width: 70% ;position: absolute; top:400px;left:30vh; min-height: 70vh;">
+      <div class="card-body">
+        <div class="row">
+          <div class="row">
+            <div class="col-6 do1 mapa2">
+              <section class="mx-auto my-4" style="max-width: 29rem;">
+              
+                <div class="card map-card do4">
+                  <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                    <div id="map4" style="border:0;" frameborder="0"></div>
+                  </div>
+                  <div class="card-body closed px-0">
+                    <div class="button px-2 mt-3">
+                      <a class="btn btn-floating btn-lg living-coral text-white float-end" id="cimaBaixo4" style="background-color: #5da0f7;margin-right: .75rem;" onclick="this.classList.toggle('rotate')"><i
+                          class="fa fa-angle-double-up"></i></a>
+                    </div>
+                    <div class="bg-white px-4 pb-4 pt-3-5">
+                      <h5 class="card-title h5 living-coral-text" style="color:#5da0f7"><span data-bind="text: localRecolha()[3]"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span data-bind="text: localEntrega()[3]"></span></h5>
+                      <div class="d-flex justify-content-between living-coral-text" style="color:#5da0f7">
+                        <h6 class="card-subtitle font-weight-light"> 3 Bagagens -&nbsp;<b>16:00 - 19:00</b>
+                          </h6>
+                        <h6 class="font-small font-weight-light mt-n1"><b>15€ </b></h6>
+                      </div>
+                      <hr>
+                      <div class="d-flex justify-content-between pt-2 mt-1 text-center text-uppercase living-coral-text" style="color:#5da0f7" onmousedown="return false" onselectstart="return false">
+                        
+                        <div type="button" onclick="$('.col-6.do1').addClass('d-none')" class="ms-5 p-3 border border-3 rounded-4"  style="color:#58b64c">
+                          <i class="fa fa-check fa-lg mb-1"></i>
+                          <p class="mb-0 mt-3">Aceitar</p>
+                        </div>
+                        <div type="button" onclick="$('.col-6.do1').addClass('d-none')" class="ms-2 me-5 p-3 text-danger  border border-3 rounded-4">
+                          <i class="fa fa-close fa-lg mb-1"></i>
+                          <p class="mb-0 mt-3">Recusar</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </section>
+            </div>
+            <div class="col-6 do2 mapa3">
+              <section class="mx-auto my-4" style="max-width: 29rem;">
+              
+                <div class="card map-card do2">
+                  <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                    <div id="map2" style="border:0;" frameborder="0"></div>
+                  </div>
+                  <div class="card-body closed px-0">
+                    <div class="button px-2 mt-3">
+                      <a class="btn btn-floating btn-lg living-coral text-white float-end"style="color:#5da0f7" id="cimaBaixo2" style="margin-right: .75rem;" onclick="this.classList.toggle('rotate')"><i
+                          class="fa fa-angle-double-up"></i></a>
+                    </div>
+                    <div class="bg-white px-4 pb-4 pt-3-5">
+                      <h5 class="card-title h5 living-coral-text"  style="color:#5da0f7"><span data-bind="text: localRecolha()[1]"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span data-bind="text: localEntrega()[1]"></span></h5>
+                      <div class="d-flex justify-content-between living-coral-text" style="color:#5da0f7">
+                        <h6 class="card-subtitle font-weight-light">1 Bagagem - &nbsp;<b>16:30 - 19:30</b></h6>
+                        <h6 class="font-small font-weight-light mt-n1"><b>8€</b></h6>
+                      </div>
+                      <hr>
+                      <div class="d-flex justify-content-between pt-2 mt-1 text-center text-uppercase living-coral-text" style="color:#5da0f7" onmousedown="return false" onselectstart="return false">
+                        
+                        <div type="button" onclick="$('.col-6.do2').addClass('d-none')" class="ms-5 p-3 border border-3 rounded-4"  style="color:#58b64c">
+                          <i class="fa fa-check fa-lg mb-1"></i>
+                          <p class="mb-0 mt-3">Aceitar</p>
+                        </div>
+                        <div type="button" onclick="$('.col-6.do2').addClass('d-none')" class="ms-2 me-5 p-3 text-danger  border border-3 rounded-4">
+                          <i class="fa fa-close fa-lg mb-1"></i>
+                          <p class="mb-0 mt-3">Recusar</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </section>
+            </div>
+            <div class="col-6 do3 mapa4">
+              <section class="mx-auto my-4" style="max-width: 29rem;">
+              
+                <div class="card map-card do3">
+                  <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                    <div id="map3" style="border:0;" frameborder="0"></div>
+                  </div>
+                  <div class="card-body closed px-0">
+                    <div class="button px-2 mt-3">
+                      <a class="btn btn-floating btn-lg living-coral text-white float-end" id="cimaBaixo3" style="background-color: #5da0f7;margin-right: .75rem;" onclick="this.classList.toggle('rotate')"><i
+                          class="fa fa-angle-double-up"></i></a>
+                    </div>
+                    <div class="bg-white px-4 pb-4 pt-3-5">
+                      <h5 class="card-title h5 living-coral-text" style="color:#5da0f7"><span data-bind="text: localRecolha()[2]"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span data-bind="text: localEntrega()[2]"></span></h5>
+                      <div class="d-flex justify-content-between living-coral-text" style="color:#5da0f7">
+                        <h6 class="card-subtitle font-weight-light">2 Bagagens - &nbsp;<b>22:00 - 04-00</b></h6>
+                        <h6 class="font-small font-weight-light mt-n1"><b>23€</b></h6>
+                      </div>
+                      <hr>
+                      <div class="d-flex justify-content-between pt-2 mt-1 text-center text-uppercase living-coral-text" style="color:#5da0f7" onmousedown="return false" onselectstart="return false">
+                        
+                        <div type="button" onclick="$('.col-6.do3').addClass('d-none')" class="ms-5 p-3 border border-3 rounded-4"  style="color:#58b64c">
+                          <i class="fa fa-check fa-lg mb-1"></i>
+                          <p class="mb-0 mt-3">Aceitar</p>
+                        </div>
+                        <div type="button" onclick="$('.col-6.do3').addClass('d-none')" class="ms-2 me-5 p-3 text-danger  border border-3 rounded-4">
+                          <i class="fa fa-close fa-lg mb-1"></i>
+                          <p class="mb-0 mt-3">Recusar</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </section>
+            </div> 
+          </div>
+          <div class="col-6">
+          
+          </div>
+        
+        </div>
+      
+    </div>
+    </div>
+    <div id="divControl"></div>
+    
+
+    
+    
+    <!-- End of Working Area -->
+    
+    <!-- NAVBAR BOTTOM -->
+
+    <script src="../libs/bootstrap-5.2.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="../libs/knockout-3.5.1.js"></script>
+    <script src="scriptProdutos.js"></script>
+  </body>
+</html>

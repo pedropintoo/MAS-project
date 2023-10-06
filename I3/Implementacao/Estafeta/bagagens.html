@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="../libs/bootstrap-5.2.2-dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../libs/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link
+    rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../libs/leaflet/leaflet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../libs/leaflet/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
+    <script src="../libs/jquery/jquery-3.6.1.js"></script>
+    <script src="../libs/knockout-3.5.1.js"></script>
+    <script src="../libs/knockout.mapping-latest.js"></script>
+    <script src="../libs/popper.min.js"></script>
+    
+    <title>Template</title>
+    <style>
+      body {
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url(../images/BannerEncomendas.jpg);
+        background-size: 60vh;
+      }
+      
+      #neubar {
+        background: #fae8d2;
+        box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+      }
+      
+      .nav-item .active {
+        border-radius: 6px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  4px 4px 8px #ddc1a0,
+                    -4px -4px 8px #f7e5cc;
+      }
+      #neubar .dropdown-menu a:hover {
+        color: #454545
+      }
+      #neubar .nav-item {
+        margin : auto 4px;
+      }
+      #neubar a {
+      
+        padding-left:12px;
+        padding-right:12px;
+      }
+      #neubar .dropdown-menu {
+        background : #545454
+      }
+      a.navbar-brand {
+        color: #454545
+      }
+      
+      .card.este{
+
+      width: 350px;
+      border: none;
+      box-shadow: 5px 6px 6px 2px #e9ecef;
+      border-radius: 12px;
+      }
+
+      .circle-image img{
+
+      border: 6px solid #fff;
+        border-radius: 100%;
+        padding: 0px;
+        top: -28px;
+        position: relative;
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        z-index: 1;
+        background: #e7d184;
+        cursor: pointer;
+
+      }
+
+
+      .dot {
+          height: 18px;
+        width: 18px;
+        background-color: blue;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        border: 3px solid #fff;
+        top: -48px;
+        left: 186px;
+        z-index: 1000;
+      }
+
+      .name{
+      margin-top: -21px;
+      font-size: 18px;
+      }
+
+
+      .fw-500{
+      font-weight: 500 !important;
+      }
+
+
+      .start{
+
+      color: green;
+      }
+
+      .stop{
+      color: red;
+      }
+
+
+      .rate{
+
+      border-bottom-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+
+      }
+
+
+
+      .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center
+      }
+
+      .rating>input {
+        display: none
+      }
+
+      .rating>label {
+        position: relative;
+        width: 1em;
+        font-size: 30px;
+        font-weight: 300;
+        color: #FFD600;
+        cursor: pointer
+      }
+
+      .rating>label::before {
+        content: "\2605";
+        position: absolute;
+        opacity: 0
+      }
+
+      .rating>label:hover:before,
+      .rating>label:hover~label:before {
+        opacity: 1 !important
+      }
+
+      .rating>input:checked~label:before {
+        opacity: 1
+      }
+
+      .rating:hover>input:checked~label:before {
+        opacity: 0.4
+      }
+
+
+      .buttons{
+      top: 36px;
+        position: relative;
+      }
+
+
+      .rating-submit{
+      border-radius: 15px;
+      color: #fff;
+          height: 49px;
+      }
+
+
+      .rating-submit:hover{
+
+      color: #fff;
+      }
+
+
+
+
+
+
+
+      .card-custom {
+        overflow: hidden;
+        min-height: 450px;
+        box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+      }
+
+      .card-custom-img {
+        background-color: #FFFFFF;
+        height: 200px;
+        min-height: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-color: inherit;
+      }
+
+      /* First border-left-width setting is a fallback */
+      .card-custom-img::after {
+        position: absolute;
+        content: '';
+        top: 161px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-top-width: 40px;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-left-width: 545px;
+        border-left-width: calc(575px - 5vw);
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: white;
+        
+      }
+
+      .card-custom-avatar img {
+        border-radius: 50%;
+        box-shadow: 0 0 50px #ff8800cc;
+        position: absolute;
+        top: 100px;
+        left: 1.25rem;
+        width: 100px;
+        height: 100px;
+      }
+      #myCard {
+        overflow: hidden;
+        box-shadow: 0 0 15px #ff88003f;
+      }
+
+      .corTop {
+        border-radius: 4px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  -4px -4px 8px #160e033f,
+                      4px 4px 8px #ddc1a0;
+                    
+      }
+
+      .backButton {opacity: 0.5;}
+      .backButton:hover {
+        opacity: 0.75;
+      }
+
+      body {
+        background-color: #f5f7fa;
+      }
+
+      .card.map-card .living-coral {
+        background-color: #5da0f7;
+      }
+
+      .card.map-card .living-coral-text {
+        color: #5da0f7;
+      }
+
+      .card.map-card .table th {
+        width: 2rem;
+      }
+
+      .card.map-card .pt-3-5 {
+        padding-top: 1.25rem;
+      }
+
+      .card.map-card .card-body {
+        position: absolute;
+        width: 100%;
+        height: 51%;
+        top: 51.8%;
+        overflow: hidden;
+        background-color: transparent;
+        -webkit-transition: all 1s;
+        -o-transition: all 1s;
+        transition: all 1s;
+        -webkit-border-radius: 0 !important;
+        border-radius: 0 !important;
+        z-index: 1000;
+      }
+
+      .card.map-card .card-body.closed {
+        top: 100%;
+        height: 9.5rem;
+        margin-top: -7.5rem;
+      }
+
+      .card.map-card .map-container {
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        height: 0;
+      }
+
+      .card.map-card .map-container #map1, .card.map-card .map-container #map2, .card.map-card .map-container #map3, .card.map-card .map-container #map4 {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+
+      .card.map-card .button .btn-floating {
+        margin-top: -1.5rem;
+      }
+      .rotate {
+        transform: rotate(180deg);
+        transition: transform 0.5s; /* adiciona uma animação de 0.5 segundos na transição */
+      }
+
+      .h1Custom { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
+
+      .h2Custom { color: #111; font-family: 'Open Sans', sans-serif; font-size: 25px; font-weight: 300; line-height: 32px; margin: 0; text-align: center; }
+      #myCard {
+        overflow: hidden;
+        box-shadow: 0 0 15px #ff88003f;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top" id="neubar">
+      <div class="container">
+        <a class="navbar-brand" href="home.html"><img src="../images/Logo.png" height="60" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+     
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+              <a class="nav-link mx-2" aria-current="page" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="produtos.html">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2 active" href="bagagens.html">Os meus serviços</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sobre nós
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Fórum</a></li>
+                <li><a class="dropdown-item" href="#">Sobre nós</a></li>
+                <li><a class="dropdown-item" href="#">Apoio ao cliente</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Entrar como cliente" class="nav-link mx-2 mb-0" href="../home.html"><img src="../images/LoginVermelho.png" height="40"/></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Working Area -->
+    
+    <div class="mt-5">a</div>
+
+    <div class="container" style="min-height: 80vh;">
+      <div class="card border-0 col-12 mx-auto mt-4 h-100" id="myCard">
+        <div class="card-header">
+          <div class="container">
+            <div class="row">
+              <b class="text-center h1Custom">Os meus serviços</b>
+              <p class="text-center h2Custom"> Lista de serviços</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="card-body">
+          <div class="input-group" style="width: 20%;">
+            <label type="button" onmousedown="return false" onselectstart="return false" class="input-group-text rounded-circle" onclick="$('#filtro').val('0');$('#filtro').change();">
+              <i class="fa fa-search" aria-hidden="true"></i></label>
+            <select id="filtro" class="form-select form-select rounded-pill" aria-label="Filter select">
+              <option selected hidden value="0">&nbsp; Filtrar<i class="fa fa-search" aria-hidden="true"></i></option>
+              <option onclick="$('#filtro').val('0');$('#filtro').change();">&nbsp; Todos</option>
+              <option value="1">&nbsp; Em andamento</option>
+              <option value="2">&nbsp; Concluido</option>
+            </select>
+          </div>
+            
+
+          <div class="container">
+            <div class="row">
+              <div class="col-4 mapa1">
+                <section class="mx-auto my-4" style="max-width: 23rem;">
+                
+                  <div class="card map-card">
+                    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                      <div id="map1" style="border:0" frameborder="0"></div>
+                    </div>
+                    <div class="card-body closed px-0">
+                      <div class="button px-2 mt-3">
+                        <a class="btn btn-floating btn-lg living-coral text-white float-end" style="background-color:#58b64c" id="cimaBaixo1" style="margin-right: .75rem;" onclick="this.classList.toggle('rotate')"><i
+                            class="fa fa-angle-double-up"></i></a>
+                      </div>
+                      <div class="bg-white px-4 pb-4 pt-3-5">
+                        <h5 class="card-title h5 living-coral-text" style="color:#58b64c"><span data-bind="text: localRecolha()[0]"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span data-bind="text: localEntrega()[0]"></span></h5>
+                        <div class="d-flex justify-content-between living-coral-text" style="color:#58b64c">
+                          <h6 class="card-subtitle font-weight-light"> <i class="fa fa-check" aria-hidden="true"></i> 
+                            Concluida</h6>
+                          <h6 class="font-small font-weight-light mt-n1">&nbsp;</h6>
+                        </div>
+                        <hr>
+                        <div  data-bs-toggle="modal" data-bs-target="#Modal1" type="button" class="d-flex justify-content-between pt-2 mt-1 text-center text-uppercase living-coral-text" style="color:#58b64c" onmousedown="return false" onselectstart="return false">
+                          
+
+                          <div class="mx-auto ">
+                            <i class="fa fa-info fa-lg mb-1"></i>
+                            <p class="mb-0 mt-3">Ver Mais</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+              </div>
+              <div class="col-4 mapa2">
+                <section class="mx-auto my-4" style="max-width: 23rem;">
+                
+                  <div class="card map-card do4">
+                    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                      <div id="map4" style="border:0;" frameborder="0"></div>
+                    </div>
+                    <div class="card-body closed px-0">
+                      <div class="button px-2 mt-3">
+                        <a class="btn btn-floating btn-lg living-coral text-white float-end" id="cimaBaixo4" style="background-color: #58b64c;margin-right: .75rem;" onclick="this.classList.toggle('rotate')"><i
+                            class="fa fa-angle-double-up"></i></a>
+                      </div>
+                      <div class="bg-white px-4 pb-4 pt-3-5">
+                        <h5 class="card-title h5 living-coral-text" style="color:#58b64c"><span data-bind="text: localRecolha()[3]"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span data-bind="text: localEntrega()[3]"></span></h5>
+                        <div class="d-flex justify-content-between living-coral-text" style="color:#58b64c">
+                          <h6 class="card-subtitle font-weight-light"> <i class="fa fa-check" aria-hidden="true"></i> 
+                            Concluida</h6>
+                          <h6 class="font-small font-weight-light mt-n1">&nbsp;</h6>
+                        </div>
+                        <hr>
+                        <div  data-bs-toggle="modal" data-bs-target="#Modal2"  type="button" class="d-flex justify-content-between pt-2 mt-1 text-center text-uppercase living-coral-text" style="color:#58b64c" onmousedown="return false" onselectstart="return false">
+                          
+                          <div class="mx-auto ">
+                            <i class="fa fa-info fa-lg mb-1"></i>
+                            <p class="mb-0 mt-3">Ver Mais</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </section>
+              </div>
+              <div class="col-4 mapa3">
+                <section class="mx-auto my-4" style="max-width: 23rem;">
+                
+                  <div class="card map-card do2">
+                    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                      <div id="map2" style="border:0;" frameborder="0"></div>
+                    </div>
+                    <div class="card-body closed px-0">
+                      <div class="button px-2 mt-3">
+                        <a class="btn btn-floating btn-lg living-coral text-white float-end este" id="cimaBaixo2" style="margin-right: .75rem;" onclick="this.classList.toggle('rotate')"><i
+                            class="fa fa-angle-double-up"></i></a>
+                      </div>
+                      <div class="bg-white px-4 pb-4 pt-3-5">
+                        <h5 class="card-title h5 living-coral-text este"><span data-bind="text: localRecolha()[1]"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span data-bind="text: localEntrega()[1]"></span></h5>
+                        <div class="d-flex justify-content-between living-coral-text este">
+                          <h6 class="card-subtitle font-weight-light">  
+                            <span data-bind="html: andamento"></span></h6>
+                          <h6 class="font-small font-weight-light mt-n1">&nbsp;</h6>
+                        </div>
+                        <hr>
+                        <div  data-bs-toggle="modal" data-bs-target="#Modal3"  type="button" class="d-flex justify-content-between pt-2 mt-1 text-center text-uppercase living-coral-text este" onmousedown="return false" onselectstart="return false">
+                          
+                          
+                          <div class="ms-3">
+                            <i class="fa fa-ban fa-lg"></i>
+                            <p class="mb-0 mt-3">Alertar</p>
+                          </div>
+                          <div class="ms-3">
+                            <i class="fa fa-comments fa-lg"></i>
+                            <p class="mb-0 mt-3">Comunicar</p>
+                          </div>
+                          <div class="ms-3">
+                            <i class="fa fa-info fa-lg mb-1"></i>
+                            <p class="mb-0 mt-3">Ver Mais</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </section>
+              </div>
+              
+            </div>
+
+            
+          </div>
+        
+        
+        </div>
+      </div>
+  
+    </div>
+
+
+
+
+    <!-- Modal para cada Mapap -->
+
+    <div class="modal fade modal-xl" id="Modal1" tabindex="-1" aria-labelledby="Modal1Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #F0F0F0;">
+          <div class="row g-0">
+            <div class="col-5">
+              <div class="modal-body">
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 700px">
+                  <div id="map1copy" class="h-100" style="border:0" frameborder="0"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="modal-header">
+                <h3 class="mx-auto"><b>Bagagem com prioridade</b></h3>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body ">
+                <div class="text-center">
+                  <div class="row">
+                    <div class="col-6">
+                      <h3 class="mb-3">
+                        Bagagem recolhida</h3>
+                        <p class="mb-4">A sua bagagem foi recolhida em Sintra às 12:00 do dia 12/12/2020</p>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <h3 class="mb-3">
+                        Bagagem Entregue</h3>
+                        <p class="mb-4">A sua bagagem foi entregue no Aeroporto de Lisboa às 18:00 do dia 12/12/2020</p>
+                    </div>
+                  
+                  
+                    <div class="col-12">
+                      <div class="accordion" id="accordionExample">
+                        <div class="accordion-item mb-3" id="thing1">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Detalhes das bagagens
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              <div class="container m-0 b-0">
+                                <div class="row" data-bind="foreach: bagagens()[0]">
+                                  <div class="col-6">
+                                    <p class="mb-0"><span style="font-size: 15px;">Dimensões</span></p>
+                                    <div class="input-group mt-0 mb-1 mx-auto">
+                                      <form class="form-floating">
+                                        <input type="text" disabled class="form-control h-100" placeholder="XXX/YYY/ZZZ (cm)" data-bind="value: Dim, valueUpdate: 'input'">
+                                        <label class="text-secondary">XXX/YYY/ZZZ (cm)</label>
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <p class="mb-0"><span style="font-size: 15px;">Peso</span></p>
+                                    <div class="input-group mt-0 mb-1 mx-auto">
+                                      <form class="form-floating">
+                                        <input type="text" disabled class="form-control h-100" placeholder="XXX (max.30Kg)" data-bind="value: Peso, valueUpdate: 'input'">
+                                        <label class="text-secondary">XXX (max.30Kg)</label>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>  
+                      <!-- Add additional accordion items here -->
+
+                    
+                    </div>
+
+                  
+                </div>
+                </div>
+
+                <button type="button" class="btn btn-secondary text-secondary border-0 w-100 corTop" data-bs-dismiss="modal">Volta à página incial</button>
+              </div>
+            </div> 
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="modal fade modal-xl" id="Modal2" tabindex="-1" aria-labelledby="Modal2Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #F0F0F0;">
+          <div class="row g-0">
+            <div class="col-5">
+              <div class="modal-body">
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 700px">
+                  <div id="map4copy" class="h-100" style="border:0" frameborder="0"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="modal-header">
+                <h3 class="mx-auto"><b>Bagagem sem prioridade</b></h3>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body ">
+                <div class="text-center" style="height: 570px">
+                  <div class="row">
+                    <div class="col-6">
+                      <h3 class="mb-3">
+                        Bagagem recolhida</h3>
+                        <p class="mb-4">A sua bagagem foi recolhida em Aeroporto de Faro às 06:00 do dia 12/12/2020</p>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <h3 class="mb-3">
+                        Bagagem Entregue</h3>
+                        <p class="mb-4">A sua bagagem foi entregue no Porches às 10:00 do dia 12/12/2020</p>
+                    </div>
+                  
+                  
+                    <div class="col-12">
+                      <div class="accordion" id="accordionExample">
+                        <div class="accordion-item mb-3" id="thing1">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Detalhes das bagagens
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              <div class="container m-0 b-0">
+                                <div class="row" data-bind="foreach: bagagens()[3]">
+                                  <div class="col-6">
+                                    <p class="mb-0"><span style="font-size: 15px;">Dimensões</span></p>
+                                    <div class="input-group mt-0 mb-1 mx-auto">
+                                      <form class="form-floating">
+                                        <input type="text" disabled class="form-control h-100" placeholder="XXX/YYY/ZZZ (cm)" data-bind="value: Dim, valueUpdate: 'input'">
+                                        <label class="text-secondary">XXX/YYY/ZZZ (cm)</label>
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <p class="mb-0"><span style="font-size: 15px;">Peso</span></p>
+                                    <div class="input-group mt-0 mb-1 mx-auto">
+                                      <form class="form-floating">
+                                        <input type="text" disabled class="form-control h-100" placeholder="XXX (max.30Kg)" data-bind="value: Peso, valueUpdate: 'input'">
+                                        <label class="text-secondary">XXX (max.30Kg)</label>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>  
+                      <!-- Add additional accordion items here -->
+
+                    
+                    </div>
+
+                  <button type="button" class="bottom-0 btn btn-secondary text-secondary border-0 w-100 corTop" data-bs-dismiss="modal">Volta à página incial</button>
+ 
+                </div>              
+
+                </div>
+
+              </div>
+            </div> 
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="modal fade modal-xl" id="Modal3" tabindex="-1" aria-labelledby="Modal3Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #F0F0F0;">
+          <div class="row g-0">
+            <div class="col-5">
+              <div class="modal-body">
+                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 700px">
+                  <div id="map2copy" class="h-100" style="border:0" frameborder="0"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-7">
+              <div class="modal-header">
+                <h3 class="mx-auto"><b>Bagagem sem prioridade</b></h3>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body ">
+                <div class="text-center" style="height: 570px">
+                  <div class="row">
+                    <div class="col-6">
+                      <h3 class="mb-3">
+                        Recolha da bagagem</h3>
+                        <p class="mb-4"><b>Aeroporto de Beja - 16:00</b></p>
+                    </div>
+                    <div class="col-6">
+                      <h3 class="mb-3">
+                        Entrega da bagagem</h3>
+                        <p class="mb-4"><b> Amareleja - 22:00</b></p>
+                    </div>
+
+                  
+                  
+                    <div class="col-6">
+                      <div class="accordion" id="accordionExample">
+                        <div class="accordion-item mb-3" id="thing1">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                              Detalhes das bagagens
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                              <div class="container m-0 b-0">
+                                <div class="row" data-bind="foreach: bagagens()[1]">
+                                  <div class="col-6">
+                                    <p class="mb-0"><span style="font-size: 15px;">Dimensões</span></p>
+                                    <div class="input-group mt-0 mb-1 mx-auto">
+                                      <form class="form-floating">
+                                        <input type="text" disabled class="form-control h-100" placeholder="XXX/YYY/ZZZ (cm)" data-bind="value: Dim, valueUpdate: 'input'">
+                                        <label class="text-secondary">XXX/YYY/ZZZ (cm)</label>
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <p class="mb-0"><span style="font-size: 15px;">Peso</span></p>
+                                    <div class="input-group mt-0 mb-1 mx-auto">
+                                      <form class="form-floating">
+                                        <input type="text" disabled class="form-control h-100" placeholder="XXX (max.30Kg)" data-bind="value: Peso, valueUpdate: 'input'">
+                                        <label class="text-secondary">XXX (max.30Kg)</label>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>  
+                      <!-- Add additional accordion items here -->
+
+                    <div class="col-6">
+                      
+                      <div class="input-group">
+                        <span id="alertaID2" data-bind="click:clearAlerta" onmousedown="return false" onmouseleave="$('#alertaID2').css('opacity','1')" onmouseenter="$('#alertaID2').css('opacity','0.9')" onselectstart="return false" type="button" class="input-group-text text-white border-danger bg-danger" style="min-height: 175px; font-size: 1.2rem;">Alertar &nbsp; <i class="fa fa-ban fa-lg"></i> </span>
+                        <textarea class="form-control" data-bind="value:alerta, valueUpdate: 'input'" aria-label="With textarea"></textarea>
+                      </div>
+
+                    
+                    </div>
+                    <!-- 
+                    .card.map-card .living-coral {
+                      background-color: #5da0f7;
+                    }
+              
+                    .card.map-card .living-coral-text {
+                      color: #5da0f7;
+                    } -->
+                    <div class="col-6">
+                      <button type="button" data-bind="click: toRec" onclick="$('.card.map-card .living-coral.este').css('background-color','#5da0f7');$('.card.map-card .living-coral-text.este').css('color','#5da0f7');document.querySelector('.map-card.do2').querySelector('.card-body').classList.toggle('closed')" data-bs-dismiss="modal" class="btn btn-primary p-3 h4 m-1 mt-5 mb-2 rounded rounded-pill shadow" style="font-size: 1.3rem;"><b><i class="fa fa-clock-o" aria-hidden="true"></i>
+                        &nbsp;   Recolha da Bagagem</b></button>
+                      <button type="button" data-bind="click: toConc" onclick="$('.card.map-card .living-coral.este').css('background-color','#58b64c');$('.card.map-card .living-coral-text.este').css('color','#58b64c');document.querySelector('.map-card.do2').querySelector('.card-body').classList.toggle('closed')" data-bs-dismiss="modal"  class="btn btn-success p-3 h4 m-1 my-5 rounded rounded-pill shadow" style="font-size: 1.3rem;"><i class="fa fa-check fa-lg" aria-hidden="true"></i>
+                      &nbsp;  Entrega da Bagagem</button>
+                    </div>
+                    <div class="col-6">
+                      <button type="button" data-bind="click: toTran" onclick="$('.card.map-card .living-coral.este').css('background-color','#9ba6b4');$('.card.map-card .living-coral-text.este').css('color','#9ba6b4');document.querySelector('.map-card.do2').querySelector('.card-body').classList.toggle('closed')" data-bs-dismiss="modal" class="btn btn-secondary p-3 h4 m-1 mt-5 mb-2 rounded rounded-pill shadow" style="font-size: 1.3rem;"><b><i class="fa fa-truck fa-lg" aria-hidden="true"></i>
+                        &nbsp;   Transp. da Bagagem</b></button>
+                      <button type="button" onclick="$('.map-card.do2').addClass('d-none');document.querySelector('.map-card.do2').querySelector('.card-body').classList.toggle('closed');" data-bs-dismiss="modal" class="btn btn-outline-danger p-3 h4 m-1 my-5 rounded rounded-pill shadow" style="font-size: 1.3rem;"><i class="fa fa-close fa-lg" aria-hidden="true"></i>
+                      &nbsp;  Cancelar Encomenda</button>
+                    </div>
+
+                  </div>
+
+                  
+                  </div>
+                <button type="button" class="bottom-0 btn btn-secondary text-secondary border-0 w-100 corTop" data-bs-dismiss="modal">Volta à página incial</button>
+
+                </div>
+
+              </div>
+            </div> 
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+   
+    
+
+    
+    
+    <!-- End of Working Area -->
+    
+    <!-- NAVBAR BOTTOM -->
+    <script>
+      function openModal(modalId) {
+        // Adiciona a classe "modal-backdrop" ao elemento da primeira modal
+        $('#staticBackdrop').addClass('modal-backdrop');
+        
+        $(modalId).modal('show');
+        
+        // Remove a classe "modal-backdrop" do elemento da primeira modal
+        $('#staticBackdrop').removeClass('modal-backdrop');
+      }
+    </script>
+    <script src="../libs/bootstrap-5.2.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="../libs/knockout-3.5.1.js"></script>
+    <script src="scriptBagagens.js"></script>
+  </body>
+</html>

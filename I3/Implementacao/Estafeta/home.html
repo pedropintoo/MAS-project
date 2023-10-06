@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="../libs/bootstrap-5.2.2-dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../libs/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../libs/jquery/jquery-3.6.1.js"></script>
+    <script src="../libs/knockout-3.5.1.js"></script>
+    <script src="../libs/popper.min.js"></script>
+    <title>Template</title>
+    <style>
+      .carousel {
+        width: 100%;
+        margin: 0 auto;
+      }
+      .carousel-item {
+        z-index: -100;
+        height: 95vh;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .carousel-item:nth-child(1) {
+        background-image: url("https://wallpaperaccess.com/full/254381.jpg");
+      }
+      .carousel-item:nth-child(2) {
+        background-image: url("https://wallpaperaccess.com/full/3958263.jpg");
+      }
+      .carousel-item:nth-child(3) {
+        background-image: url("https://i.guim.co.uk/img/media/3a08a9c1874af58ef8e2b9eaf61618416c5caaa0/0_518_4250_2549/master/4250.jpg?width=1200&quality=85&auto=format&fit=max&s=7e4a883cda22cfdeb85089da969187b8");
+      }
+
+      .carousel-item:nth-child(4) {
+        background-image: url("https://media.cntraveler.com/photos/606e77d6ac52332b71f17199/master/pass/GettyImages-1008302136-2.jpg");
+      }
+      #neubar {
+        background: #fae8d2;
+        box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+      }
+      
+      .nav-item .active {
+        border-radius: 6px;
+        background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
+        box-shadow:  4px 4px 8px #ddc1a0,
+                    -4px -4px 8px #f7e5cc;
+      }
+      #neubar .dropdown-menu a:hover {
+        color: #454545
+      }
+      #neubar .nav-item {
+        margin : auto 4px;
+      }
+      #neubar a {
+      
+        padding-left:12px;
+        padding-right:12px;
+      }
+      #neubar .dropdown-menu {
+        background : #545454
+      }
+      a.navbar-brand {
+        color: #454545
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top" id="neubar">
+      <div class="container">
+        <a class="navbar-brand" href="home.html"><img src="../images/Logo.png" height="60" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+     
+        <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+              <a class="nav-link mx-2 active" aria-current="page" href="home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="produtos.html">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="bagagens.html">Os meus serviços</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sobre nós
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Fórum</a></li>
+                <li><a class="dropdown-item" href="#">Sobre nós</a></li>
+                <li><a class="dropdown-item" href="#">Apoio ao cliente</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Entrar como cliente" class="nav-link mx-2 mb-0" href="../home.html"><img src="../images/LoginVermelho.png" height="40" /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Working Area -->
+    <div
+      id="myCarousel"
+      class="carousel slide carousel-fade mb-5"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="0"
+          aria-label="Slide 1"
+          class="active"
+          aria-current="true"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="3"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-caption d-none d-md-block">
+            <div class="display-1">LugCase</div>
+            <p>
+              Um serviço de transporte de malas e bagagens, que promete revolucionar os transtornos nas viagens 
+              , em que é possível o transporte de bagagens diretamente do aeroporto até um local prentendido, seja um hotel,
+               uma casa ou até um escritório, ou vice-versa
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-caption d-none d-md-block">
+            <div class="display-1">SpeedWheels</div>
+            <p>
+              O promotor deste serviço é a empresa SpeedWheels , uma empresa de transportes, que 
+              atua no transporte de pessoas, e está a desenvolveu um serviço de transporte de malas e bagagens,
+              diretamente do aeroporto até ao local selecionado pelo Cliente.
+
+
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-caption d-none d-md-block">
+            <div class="display-1">Apoio ao cliente</div>
+            <p>
+              Caso alguma coisa aconteçer com a mala, não se preocupe.
+              Entre em contacto connosco e nós resolvemos
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-caption d-none d-md-block">
+            <div class="display-1">Método de identificação</div>
+            <p>
+              De forma a identificar e recolher a bagagem de uma forma segura,
+              deve colocar na mala uma etiqueta com o QR code fornecido após fazer a encomeda.
+              Isto serviço muito mais seguro.
+            </p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#myCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#myCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- End of Working Area -->
+    
+    <!-- NAVBAR BOTTOM -->
+
+    <script src="../libs/bootstrap-5.2.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="../libs/knockout-3.5.1.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
